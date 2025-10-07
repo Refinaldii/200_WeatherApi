@@ -6,21 +6,25 @@
     <title>Weather Wizard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3b82f6',
-                        secondary: '#8b5cf6'
-                    }
-                }
-            }
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
         }
-    </script>
+        .weather-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-blue-800 to-blue-600 min-h-screen flex items-center justify-center">
-    <h1 class="text-white text-3xl font-bold">Weather Wizard</h1>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="weather-card p-8 rounded-2xl text-white text-center">
+        <h1 class="text-3xl font-bold mb-2">Weather Wizard</h1>
+        <p>Temukan cuaca di seluruh dunia</p>
+    </div>
     <script>feather.replace();</script>
 </body>
 </html>
