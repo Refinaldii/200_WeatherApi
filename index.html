@@ -8,22 +8,22 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        }
-        .weather-card {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg,#1e3c72,#2a5298); }
+        .weather-card { backdrop-filter: blur(10px); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center">
-    <div class="weather-card p-8 rounded-2xl text-white text-center">
-        <h1 class="text-3xl font-bold mb-2">Weather Wizard</h1>
-        <p>Temukan cuaca di seluruh dunia</p>
+<body class="flex justify-center items-center min-h-screen">
+    <div class="weather-card rounded-2xl p-8 text-white w-full max-w-md">
+        <h1 class="text-3xl font-bold text-center mb-6">Weather Wizard</h1>
+        <div class="flex mb-6">
+            <input type="text" id="inputLokasi" placeholder="Masukkan nama kota..." class="flex-grow px-4 py-3 rounded-l-full text-gray-700 focus:outline-none">
+            <button id="btnGet" class="bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-r-full text-white font-semibold"><i data-feather="search"></i></button>
+        </div>
+        <div class="text-center">
+            <div id="celcius" class="text-4xl font-bold mb-2">--°C</div>
+            <div id="kota">Kota</div>
+            <div id="negara" class="text-sm opacity-80">Negara</div>
+        </div>
     </div>
     <script>feather.replace();</script>
 </body>
