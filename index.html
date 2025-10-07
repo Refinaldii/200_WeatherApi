@@ -19,10 +19,28 @@
             <input type="text" id="inputLokasi" placeholder="Masukkan nama kota..." class="flex-grow px-4 py-3 rounded-l-full text-gray-700 focus:outline-none">
             <button id="btnGet" class="bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-r-full text-white font-semibold"><i data-feather="search"></i></button>
         </div>
-        <div class="text-center">
+        <div class="text-center mb-6">
             <div id="celcius" class="text-4xl font-bold mb-2">--°C</div>
             <div id="kota">Kota</div>
             <div id="negara" class="text-sm opacity-80">Negara</div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-blue-500 bg-opacity-20 rounded-xl p-3 text-center">
+                <div class="text-sm">Kelembapan</div>
+                <div id="humidity" class="text-xl font-bold">--%</div>
+            </div>
+            <div class="bg-purple-500 bg-opacity-20 rounded-xl p-3 text-center">
+                <div class="text-sm">Fahrenheit</div>
+                <div id="fahrenheit" class="text-xl font-bold">--°F</div>
+            </div>
+        </div>
+        <div class="bg-white bg-opacity-10 rounded-xl p-4 text-sm">
+            <h3 class="font-semibold mb-2 flex items-center"><i data-feather="map-pin" class="mr-2"></i> Lokasi Detail</h3>
+            <div class="grid grid-cols-2 gap-2">
+                <div>Provinsi:</div><div id="provinsi" class="text-right font-medium">-</div>
+                <div>Longitude:</div><div id="longitude" class="text-right font-medium">-</div>
+                <div>Latitude:</div><div id="latitude" class="text-right font-medium">-</div>
+            </div>
         </div>
     </div>
     <script>feather.replace();</script>
