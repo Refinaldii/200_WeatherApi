@@ -4,48 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Wizard</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .weather-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        .temp-display {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .location-pin {
+            position: relative;
+            display: inline-block;
+        }
+        .location-pin::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        }
+    </style>
 </head>
-<body class="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-800 to-blue-600">
-    <div class="weather-card rounded-2xl p-8 text-white w-full max-w-md">
-        <h1 class="text-3xl font-bold text-center mb-6">Weather Wizard</h1>
-        <div class="flex mb-6">
-            <input type="text" id="inputLokasi" placeholder="Masukkan nama kota..." class="flex-grow px-4 py-3 rounded-l-full text-gray-700 focus:outline-none">
-            <button id="btnGet" class="bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-r-full text-white font-semibold"><i data-feather="search"></i></button>
-        </div>
-        <div class="text-center mb-6">
-            <div id="celcius" class="text-4xl font-bold mb-2">--°C</div>
-            <div id="kota">Kota</div>
-            <div id="negara" class="text-sm opacity-80">Negara</div>
-        </div>
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div><div id="humidity">--%</div></div>
-            <div><div id="fahrenheit">--°F</div></div>
-        </div>
-        <div>
-            <div id="provinsi">-</div>
-            <div id="longitude">-</div>
-            <div id="latitude">-</div>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <div class="weather-card rounded-2xl p-6 max-w-md w-full mx-auto">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-white mb-2">Weather Wizard</h1>
+                <p class="text-blue-100">Temukan cuaca di seluruh dunia</p>
+            </div>
+            
+            <div class="mb-8">
+                <div class="flex items-center bg-white rounded-full overflow-hidden shadow-lg">
+                    <input type="text" id="inputLokasi" placeholder="Masukkan nama kota..." class="flex-grow px-6 py-4 focus:outline-none text-gray-700">
+                    <button id="btnGet" class="bg-gradient-to-r from-primary to-secondary hover:from-blue-500 hover:to-purple-600 text-white px-6 py-4 font-semibold transition duration-300 ease-in-out">
+                        <i data-feather="search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="weather-info text-white">
+                <div class="text-center mb-6">
+                    <div class="temp-display mb-2" id="celcius">--</div>
+                    <div class="text-xl" id="kota">Kota</div>
+                    <div class="text-sm opacity-80" id="negara">Negara</div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-blue-500 bg-opacity-20 rounded-xl p-4 text-center">
+                        <div class="text-sm mb-1">Kelembapan</div>
+                        <div class="text-xl font-bold" id="humidity">--%</div>
+                    </div>
+                    <div class="bg-purple-500 bg-opacity-20 rounded-xl p-4 text-center">
+                        <div class="text-sm mb-1">Fahrenheit</div>
+                        <div class="text-xl font-bold" id="fahrenheit">--°F</div>
+                    </div>
+                </div>
+
+                <div class="bg-white bg-opacity-10 rounded-xl p-4">
+                    <h3 class="font-semibold mb-3 flex items-center">
+                        <i data-feather="map-pin" class="mr-2"></i>
+                        <span class="location-pin">Lokasi Detail</span>
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div>Provinsi:</div>
+                        <div class="font-medium text-right" id="provinsi">-</div>
+                        
+                        <div>Longitude:</div>
+                        <div class="font-medium text-right" id="longitude">-</div>
+                        
+                        <div>Latitude:</div>
+                        <div class="font-medium text-right" id="latitude">-</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         feather.replace();
+        
         const apiKey = "f2e9bc8fbcd0487398c65550250710";
 
-        $("#btnGet").click(function() {
+        $("#btnGet").click(function () {
             const lokasi = $("#inputLokasi").val().trim();
             if (lokasi === "") {
                 alert("Masukkan nama kota terlebih dahulu!");
                 return;
             }
+
             const urlapi = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lokasi}&aqi=no`;
+
             $.ajax({
                 url: urlapi,
                 method: "GET",
                 success: function (data) {
+                    console.log(data);
                     $("#celcius").text(data.current.temp_c + "°C");
                     $("#fahrenheit").text(data.current.temp_f + "°F");
                     $("#humidity").text(data.current.humidity + "%");
